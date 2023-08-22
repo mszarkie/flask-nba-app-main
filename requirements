@@ -1,0 +1,8 @@
+flask
+python-dotenv
+flask-sqlalchemy
+pymysql
+cryptography
+flask-smorest
+flask-migrate
+marshmallow

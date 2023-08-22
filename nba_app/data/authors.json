@@ -1,0 +1,62 @@
+[
+  {
+    "team_name": "Miami Heat",
+    "coach": "Erik Spoelstra",
+    "city": "Miami",
+    "total_championships": 3
+  },
+  {
+    "team_name": "Los Angeles Lakers",
+    "coach": "Darvin Ham",
+    "city": "Los Angeles",
+    "total_championships": 17
+  },
+  {
+    "team_name": "Golden State Warriors",
+    "coach": "Steve Kerr",
+    "city": "San Francisco",
+    "total_championships": 7
+  },
+  {
+    "team_name": "Boston Celtics",
+    "coach": "Joe Mazzulla",
+    "city": "Boston",
+    "total_championships": 16
+  },
+  {
+    "team_name": "Oklahoma City Thunder",
+    "coach": "Mark Daigneault",
+    "city": "Oklahoma City",
+    "total_championships": 0
+  },
+  {
+    "team_name": "Dallas Mavericks",
+    "coach": "Jason Kidd",
+    "city": "Dallas",
+    "total_championships": 0
+  },
+  {
+    "team_name": "Toronto Raptors",
+    "coach": "Darko Rajakovic",
+    "city": "Toronto ",
+    "total_championships": 1
+  },
+  {
+    "team_name": "Cichago Bulls",
+    "coach": "Billy Donovan",
+    "city": "Cichago",
+    "total_championships": 6
+  },
+  {
+    "team_name": "Philadelphia 76ers",
+    "coach": "Nick Nurse",
+    "city": "Philadelphia",
+    "total_championships": 3
+  },
+  {
+    "team_name": "Detroit Pistons",
+    "coach": "Monty Williams",
+    "city": "Detroit",
+    "total_championships": 5
+  }
+]
