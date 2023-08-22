@@ -17,7 +17,6 @@ from nba_app.errors import blp as ErrorsBluePrint
 from nba_app.teams import blp as TeamsBluePrint
 
 
-
 def create_app():
 
     load_dotenv()

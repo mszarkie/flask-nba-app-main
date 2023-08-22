@@ -14,6 +14,13 @@ class Team(db.Model):
     def __repr__(self):
         return f'<{self.__class__.__name__}>: {self.team_name}'
 
+    @staticmethod
+    def get_schema_args(fields: str) -> dict:
+        schema_args = {'many': True}
+        if fields:
+            schema_args['only'] = [field for field in fields.split(',') if field in Team.__table__.columns]
+        return schema_args
+
 
 class TeamSchema(Schema):
     id = fields.Integer(dump_only=True)

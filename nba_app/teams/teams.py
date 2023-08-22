@@ -1,19 +1,21 @@
-from flask import jsonify
+from flask import jsonify, request
 from app import db
 from nba_app.models.teamsM import Team, TeamSchema, teams_schema
 from webargs.flaskparser import use_args
 from nba_app.teams import blp
 from nba_app.utils import validate_content_type
 
+
 @blp.route('/teams', methods=['GET'])
 def get_teams():
     teams = Team.query.all()
-    teams_schema = TeamSchema(many=True)
+    schema_args = Team.get_schema_args(request.args.get('fields'))
+    teams_schema = TeamSchema(**schema_args)
 
     return jsonify({
         'success': True,
         'data': teams_schema.dump(teams),
-        'number_of_records' : len(teams)
+        'number_of_records': len(teams)
     })
 
 
