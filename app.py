@@ -1,13 +1,8 @@
-import os
 from flask import Flask
 from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-
-
-database_url = os.getenv("SQLALCHEMY_DATABASE_URI")
-secret_key = os.getenv("SECRET_KEY")
-per_page = os.getenv("PER_PAGE")
+from config import Config
 
 
 db = SQLAlchemy()
@@ -23,10 +18,7 @@ def create_app():
     load_dotenv()
 
     app = Flask(__name__)
-    app.config["SQLALCHEMY_DATABASE_URI"] = database_url
-    app.config["SECRET_KEY"] = secret_key
-    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
-    app.config["PER_PAGE"] = per_page
+    app.config.from_object(Config)
 
     db.init_app(app)
     migrate.init_app(app, db)

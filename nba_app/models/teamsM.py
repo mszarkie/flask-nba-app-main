@@ -2,8 +2,8 @@ from app import db
 from marshmallow import Schema, fields, validate
 from flask_sqlalchemy import BaseQuery
 from flask import request, url_for
-from app import per_page
 from typing import Tuple
+from config import Config
 
 
 class Team(db.Model):
@@ -51,7 +51,7 @@ class Team(db.Model):
     @staticmethod
     def get_pagination(query: BaseQuery) -> Tuple[list, dict]:
         page = request.args.get('page', 1, type=int)
-        limit = request.args.get('limit', per_page, type=int)
+        limit = request.args.get('limit', Config.PER_PAGE, type=int)
         params = {key: value for key, value in request.args.items() if key != 'page'}
         paginate_obj = query.paginate(page=page, per_page=limit, error_out=False)
         pagination = {
