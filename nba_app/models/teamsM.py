@@ -14,6 +14,7 @@ class Team(db.Model):
     coach = db.Column(db.String(30), nullable=False)
     city = db.Column(db.String(30), nullable=False)
     total_championships = db.Column(db.Integer, nullable=False)
+    player = db.relationship('Player', back_populates='team', cascade='all, delete-orphan')
 
     def __repr__(self):
         return f'<{self.__class__.__name__}>: {self.team_name}'
