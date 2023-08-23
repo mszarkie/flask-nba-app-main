@@ -8,14 +8,19 @@ from nba_app.utils import validate_content_type
 
 @blp.route('/teams', methods=['GET'])
 def get_teams():
-    teams = Team.query.all()
+    query = Team.query
     schema_args = Team.get_schema_args(request.args.get('fields'))
-    teams_schema = TeamSchema(**schema_args)
+    query = Team.apply_order(query, request.args.get('sort'))
+    query = Team.apply_filter(query)
+    items, pagination = Team.get_pagination(query)
+
+    teams = TeamSchema(**schema_args).dump(items)
 
     return jsonify({
         'success': True,
-        'data': teams_schema.dump(teams),
-        'number_of_records': len(teams)
+        'data': teams,
+        'number_of_records': len(teams),
+        'pagination': pagination
     })
 
 
