@@ -14,6 +14,7 @@ class Team(db.Model):
     coach = db.Column(db.String(30), nullable=False)
     city = db.Column(db.String(30), nullable=False)
     total_championships = db.Column(db.Integer, nullable=False)
+    player = db.relationship('Player', back_populates='team')
 
     def __repr__(self):
         return f'<{self.__class__.__name__}>: {self.team_name}'
@@ -67,6 +68,18 @@ class Team(db.Model):
             pagination['previous_page'] = url_for('teams.get_teams', page=page-1, **params)
 
         return paginate_obj.items, pagination
+
+
+class Player(db.Model):
+    __tablename__ = 'players'
+
+    id = db.Column(db.Integer, primary_key=True)
+    first_name = db.Column(db.String(30), nullable=False)
+    last_name = db.Column(db.String(30), unique=True, nullable=False)
+    birth_date = db.Column(db.Date, nullable=False)
+    position = db.Column(db.String(15), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable=False)
+    team = db.relationship('Team', back_populates='player')
 
 
 class TeamSchema(Schema):

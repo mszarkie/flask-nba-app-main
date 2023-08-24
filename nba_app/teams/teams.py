@@ -1,6 +1,6 @@
 from flask import jsonify, request
 from app import db
-from nba_app.models.teamsM import Team, TeamSchema, teams_schema
+from nba_app.models.models import Team, TeamSchema, teams_schema
 from webargs.flaskparser import use_args
 from nba_app.teams import blp
 from nba_app.utils import validate_content_type

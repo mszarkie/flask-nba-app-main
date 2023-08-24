@@ -1,7 +1,7 @@
 from app import db
 import json
 from pathlib import Path
-from nba_app.models.teamsM import Team
+from nba_app.models.models import Team
 from sqlalchemy.sql import text
 from nba_app.commands import blp
 
