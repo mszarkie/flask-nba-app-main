@@ -1,0 +1,22 @@
+[
+  {
+    "first_name": "Lebron",
+    "last_name": "James",
+    "birth_date": "30-12-1984",
+    "position": "Power forward",
+    "team_id": 5
+  },
+  {
+    "first_name": "Stephen",
+    "last_name": "Curry",
+    "birth_date": "14-03-1988",
+    "position": "Point Guard",
+    "team_id": 3
+  },  {
+    "first_name": "Kevin",
+    "last_name": "Durant",
+    "birth_date": "29-09-1988",
+    "position": "Small forward",
+    "team_id": 2
+  }
+]

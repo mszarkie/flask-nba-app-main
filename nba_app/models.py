@@ -16,11 +16,11 @@ class Team(db.Model):
     total_championships = db.Column(db.Integer, nullable=False)
     player = db.relationship('Player', back_populates='team', cascade='all, delete-orphan')
 
-
     def __repr__(self):
         return f'<{self.__class__.__name__}>: {self.team_name}'
 
     @staticmethod
+    #function below allow to view particular choosen data
     def get_schema_args(fields: str) -> dict:
         schema_args = {'many': True}
         if fields:
@@ -81,6 +81,9 @@ class Player(db.Model):
     position = db.Column(db.String(15), nullable=False)
     team_id = db.Column(db.Integer, db.ForeignKey('teams.id'), nullable=False)
     team = db.relationship('Team', back_populates='player')
+
+    def __repr__(self):
+        return f'<{self.__class__.__name__}>: {self.first_name} {self.last_name}'
 
 
 class TeamSchema(Schema):
