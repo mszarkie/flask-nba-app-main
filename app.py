@@ -8,23 +8,21 @@ from config import Config
 db = SQLAlchemy()
 migrate = Migrate()
 
-from nba_app.commands import blp as CommandBluePrint
-from nba_app.errors import blp as ErrorsBluePrint
-from nba_app.teams import blp as TeamsBluePrint
 
-
-def create_app():
-
-    load_dotenv()
+def create_app(config_class=Config):
 
     app = Flask(__name__)
-    app.config.from_object(Config)
+    app.config.from_object(config_class)
 
     db.init_app(app)
     migrate.init_app(app, db)
 
+    from nba_app.commands import blp as CommandBluePrint
+    from nba_app.errors import blp as ErrorsBluePrint
+    from nba_app.teams import blp as TeamsBluePrint
+
     app.register_blueprint(CommandBluePrint)
     app.register_blueprint(ErrorsBluePrint)
-    app.register_blueprint(TeamsBluePrint)
+    app.register_blueprint(TeamsBluePrint, url_prefix='/v1')
 
     return app
