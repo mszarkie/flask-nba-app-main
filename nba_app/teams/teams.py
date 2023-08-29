@@ -1,18 +1,19 @@
-from flask import jsonify, request
-from app import db
-from nba_app.models import Team, TeamSchema, teams_schema
+from flask import jsonify
 from webargs.flaskparser import use_args
+
+from app import db
 from nba_app.teams import blp
-from nba_app.utils import validate_content_type
+from nba_app.utils import validate_content_type, get_schema_args, apply_order, apply_filter, get_pagination
+from nba_app.models import Team, TeamSchema, teams_schema
 
 
 @blp.route('/teams', methods=['GET'])
 def get_teams():
     query = Team.query
-    schema_args = Team.get_schema_args(request.args.get('fields'))
-    query = Team.apply_order(query, request.args.get('sort'))
-    query = Team.apply_filter(query)
-    items, pagination = Team.get_pagination(query)
+    schema_args = get_schema_args(Team)
+    query = apply_order(Team, query)
+    query = apply_filter(Team, query)
+    items, pagination = get_pagination(query, 'teams.get_teams')
 
     teams = TeamSchema(**schema_args).dump(items)
 

@@ -13,10 +13,22 @@
     "position": "Point Guard",
     "team_id": 3
   },  {
-    "first_name": "Kevin",
-    "last_name": "Durant",
-    "birth_date": "29-09-1988",
-    "position": "Small forward",
-    "team_id": 2
+    "first_name": "Joel",
+    "last_name": "Embiid",
+    "birth_date": "16-03-1994",
+    "position": "Center",
+    "team_id": 9
+  },  {
+    "first_name": "Luka",
+    "last_name": "Doncic",
+    "birth_date": "28-02-1999",
+    "position": "Shooting Guard",
+    "team_id": 9
+  },  {
+    "first_name": "Jimmy",
+    "last_name": "Butler",
+    "birth_date": "14-09-1989",
+    "position": "Small Forward",
+    "team_id": 9
   }
 ]
