@@ -3,8 +3,8 @@
     "first_name": "Lebron",
     "last_name": "James",
     "birth_date": "30-12-1984",
-    "position": "Power forward",
-    "team_id": 5
+    "position": "Power Forward",
+    "team_id": 2
   },
   {
     "first_name": "Stephen",
@@ -23,12 +23,18 @@
     "last_name": "Doncic",
     "birth_date": "28-02-1999",
     "position": "Shooting Guard",
-    "team_id": 9
+    "team_id": 6
   },  {
     "first_name": "Jimmy",
     "last_name": "Butler",
     "birth_date": "14-09-1989",
     "position": "Small Forward",
-    "team_id": 9
+    "team_id": 1
+  },  {
+    "first_name": "Kyle",
+    "last_name": "Lowry",
+    "birth_date": "25-03-1986",
+    "position": "Point Guard",
+    "team_id": 1
   }
 ]

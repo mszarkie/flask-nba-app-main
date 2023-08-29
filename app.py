@@ -1,5 +1,4 @@
 from flask import Flask
-from dotenv import load_dotenv
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from config import Config
@@ -20,9 +19,11 @@ def create_app(config_class=Config):
     from nba_app.commands import blp as CommandBluePrint
     from nba_app.errors import blp as ErrorsBluePrint
     from nba_app.teams import blp as TeamsBluePrint
+    from nba_app.players import blp as PlayersBluePrint
 
     app.register_blueprint(CommandBluePrint)
     app.register_blueprint(ErrorsBluePrint)
     app.register_blueprint(TeamsBluePrint, url_prefix='/v1')
+    app.register_blueprint(PlayersBluePrint, url_prefix='/v1')
 
     return app
