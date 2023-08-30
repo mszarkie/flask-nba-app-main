@@ -4,7 +4,7 @@ from webargs.flaskparser import use_args
 from app import db
 from nba_app.teams import blp
 from nba_app.utils import validate_content_type, get_schema_args, apply_order, apply_filter, get_pagination
-from nba_app.models import Team, TeamSchema, teams_schema
+from nba_app.models import Team, TeamSchema, teams_schema, Player, PlayerSchema
 
 
 @blp.route('/teams', methods=['GET'])
@@ -78,3 +78,4 @@ def delete_team(team_id: int):
         'success': True,
         'data': f'Team with id {team_id} has been deleted'
     })
+
