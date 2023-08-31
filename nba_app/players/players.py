@@ -4,7 +4,7 @@ from webargs.flaskparser import use_args
 from app import db
 from nba_app.players import blp
 from nba_app.utils import validate_content_type, get_schema_args, apply_order, apply_filter, get_pagination
-from nba_app.models import Player, PlayerSchema, players_schema, Team, teams_schema
+from nba_app.models import Player, PlayerSchema, players_schema, Team
 
 
 @blp.route('/players', methods=['GET'])
