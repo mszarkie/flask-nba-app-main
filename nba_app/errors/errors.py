@@ -30,3 +30,5 @@ def bad_request_error(err):
 @blp.app_errorhandler(415)
 def unsupported_media_type_error(err):
     return ErrorResponse(err.description, 404).to_response()
+
+
