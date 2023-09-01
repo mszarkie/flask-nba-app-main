@@ -6,3 +6,4 @@ cryptography
 flask-smorest
 flask-migrate
 marshmallow
+pyjwt
