@@ -3,7 +3,8 @@ from webargs.flaskparser import use_args
 
 from app import db
 from nba_app.teams import blp
-from nba_app.utils import validate_content_type, get_schema_args, apply_order, apply_filter, get_pagination
+from nba_app.utils import validate_content_type, get_schema_args, apply_order, apply_filter, get_pagination, \
+token_required
 from nba_app.models import Team, TeamSchema, teams_schema
 
 
@@ -35,8 +36,10 @@ def get_team(team_id: int):
 
 
 @blp.route('/teams', methods=['POST'])
+@token_required
+@validate_content_type
 @use_args(teams_schema, error_status_code=400)
-def create_team(args: dict):
+def create_team(user_id: str, args: dict):
     team = Team(**args)
 
     db.session.add(team)
@@ -49,9 +52,10 @@ def create_team(args: dict):
 
 
 @blp.route('/teams/<int:team_id>', methods=['PUT'])
+@token_required
 @validate_content_type
 @use_args(teams_schema, error_status_code=400)
-def update_team(args: dict, team_id: int):
+def update_team(user_id: str, args: dict, team_id: int):
     team = Team.query.get_or_404(team_id, description=f'Team with id {team_id} not found')
 
     team.team_name = args['team_name']
@@ -68,7 +72,8 @@ def update_team(args: dict, team_id: int):
 
 
 @blp.route('/teams/<int:team_id>', methods=['DELETE'])
-def delete_team(team_id: int):
+@token_required
+def delete_team(user_id: str, team_id: int):
     team = Team.query.get_or_404(team_id, description=f'Team with id {team_id} not found')
 
     db.session.delete(team)

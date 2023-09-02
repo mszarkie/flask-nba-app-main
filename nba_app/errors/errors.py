@@ -21,14 +21,29 @@ def not_found_error(err):
     return ErrorResponse(err.description, 404).to_response()
 
 
+@blp.app_errorhandler(409)
+def unauthorized_error(err):
+    return ErrorResponse(err.description, 409).to_response()
+
+
 @blp.app_errorhandler(400)
 def bad_request_error(err):
     messages = err.data.get('messages', {}).get('json', {})
     return ErrorResponse(messages, 400).to_response()
 
 
+@blp.app_errorhandler(401)
+def unauthorized_error(err):
+    return ErrorResponse(err.description, 401).to_response()
+
+
 @blp.app_errorhandler(415)
 def unsupported_media_type_error(err):
-    return ErrorResponse(err.description, 404).to_response()
+    return ErrorResponse(err.description, 415).to_response()
+
+
+@blp.app_errorhandler(409)
+def conflict_error(err):
+    return ErrorResponse(err.description, 409).to_response()
 
 
