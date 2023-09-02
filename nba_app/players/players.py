@@ -6,6 +6,7 @@ from nba_app.players import blp
 from nba_app.utils import validate_content_type, get_schema_args, apply_order, apply_filter, get_pagination, \
 token_required
 from nba_app.models import Player, PlayerSchema, players_schema, Team
+from sqlalchemy.exc import IntegrityError
 
 
 @blp.route('/players', methods=['GET'])
@@ -39,7 +40,7 @@ def get_player(player_id: int):
 @token_required
 @validate_content_type
 @use_args(players_schema, error_status_code=400)
-def update_player(user_id: str, args: dict, player_id: int):
+def update_player(user_id: int, args: dict, player_id: int):
     player = Player.query.get_or_404(player_id, description=f'Player with id {player_id} not found')
 
     player.first_name = args['first_name']
@@ -57,7 +58,7 @@ def update_player(user_id: str, args: dict, player_id: int):
 
 @blp.route('/player/<int:player_id>', methods=['DELETE'])
 @token_required
-def delete_player(user_id: str, player_id: int):
+def delete_player(user_id: int, player_id: int):
     player = Player.query.get_or_404(player_id, description=f'Player with id {player_id} not found')
 
     db.session.delete(player)
@@ -71,7 +72,7 @@ def delete_player(user_id: str, player_id: int):
 
 @token_required
 @blp.route('/teams/<int:team_id>/players', methods=['GET'])
-def get_all_team_players(user_id: str, team_id: int):
+def get_all_team_players(user_id: int, team_id: int):
     Team.query.get_or_404(team_id, description=f'Team with id {team_id} not found')
     players = Player.query.filter(Player.team_id == team_id).all()
 
@@ -89,13 +90,19 @@ def get_all_team_players(user_id: str, team_id: int):
 @token_required
 @validate_content_type
 @use_args(PlayerSchema(exclude=['team_id']), error_status_code=400)
-def create_player(user_id: str, args: dict, team_id: int):
+def create_player(user_id: int, args: dict, team_id: int):
     Team.query.get_or_404(team_id, description=f'Team with id {team_id} not found')
 
     player = Player(team_id=team_id, **args)
 
-    db.session.add(player)
-    db.session.commit()
+    try:
+        db.session.add(player)
+        db.session.commit()
+    except IntegrityError:
+        return jsonify({
+            'success': False,
+            'message': f'{player} already exist.'
+        })
 
     return jsonify(({
         'success': True,
